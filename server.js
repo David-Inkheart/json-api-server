@@ -1,5 +1,5 @@
 const jsonServer = require('json-server')
-const clone = require('clone')
+//const clone = require('clone')
 const data = require('./db.json')
 
 const isProductionEnv = process.env.NODE_ENV === 'production';
@@ -11,7 +11,7 @@ const server = jsonServer.create()
 // })
 
 // POST requests will make changes to the DB in production environment
-const router = jsonServer.router(isProductionEnv ? clone(data) : 'db.json')
+//const router = jsonServer.router(isProductionEnv ? clone(data) : 'db.json')
 
 const middlewares = jsonServer.defaults()
 
