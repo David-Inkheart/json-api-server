@@ -10,8 +10,8 @@ const server = jsonServer.create()
 //    _isFake: isProductionEnv
 // })
 
-// POST requests will make changes to the DB in production environment
-//const router = jsonServer.router(isProductionEnv ? clone(data) : 'db.json')
+//POST requests will make changes to the DB in production environment
+const router = jsonServer.router('db.json')
 
 const middlewares = jsonServer.defaults()
 
