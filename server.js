@@ -1,6 +1,6 @@
 const jsonServer = require('json-server')
 //const clone = require('clone')
-//const data = require('./db.json')
+const data = require('./db.json')
 
 //const isProductionEnv = process.env.NODE_ENV === 'production';
 //const server = jsonServer.create()
@@ -11,20 +11,17 @@ const jsonServer = require('json-server')
 // })
 
 //POST requests will make changes to the DB in production environment
-//const router = jsonServer.router(isProductionEnv ? data : 'db.json', {
-//    _isFake: isProductionEnv
-//})
+const router = jsonServer.router(isProductionEnv ? 'db.json' : 'db.json')
 const server = jsonServer.create()
-const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
 
 server.use(middlewares)
 
-//server.use((req, res, next) => {
-//    if (req.path !== '/')
-//        router.db.setState(clone(data))
-//    next()
-//})
+server.use((req, res, next) => {
+    if (req.path !== '/')
+        router.db.setState('db.json')
+    next()
+})
 
 server.use(router)
 server.listen(process.env.PORT || 8000, () => {
